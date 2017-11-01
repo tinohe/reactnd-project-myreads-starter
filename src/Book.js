@@ -5,17 +5,22 @@ class Book extends Component {
 
 	static propTypes = {
 	    title: PropTypes.string.isRequired,
-	    authors: PropTypes.string.isRequired,
-			style: PropTypes.object.isRequired
+	    authors: PropTypes.array,
+			imageurl: PropTypes.string.isRequired
 	  }
 
 	render() {
 
-		const { title , authors, style } = this.props;
+
+		const { title , authors, imageurl } = this.props;
 
 		return <div className="book">
 										<div className="book-top">
-											<div className="book-cover" style={style}></div>
+											<div className="book-cover" style={{
+												width: 130,
+				              	height: 190,
+												backgroundImage: `url("${imageurl}")`
+							}}></div>
 											<div className="book-shelf-changer">
 												<select>
 												<option value="none" disabled>Move to...</option>
@@ -28,7 +33,7 @@ class Book extends Component {
 										</div>
 
 										<div className="book-title">{ title }</div>
-										<div className="book-authors">{ authors }</div>
+										<div className="book-authors">{ authors ? authors.join(', ') : '' }</div>
 									</div>;
 	}
 }
