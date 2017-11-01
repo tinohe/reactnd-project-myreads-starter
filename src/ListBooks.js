@@ -31,11 +31,11 @@ componentDidMount() {
        </div>
        <div className="list-books-content">
 
-         <BookShelf title="Currently Reading" books={this.state.booksCurrentlyReading}/>
+         <BookShelf shelfType="currentlyReading" title="Currently Reading" books={this.state.booksCurrentlyReading}/>
 
-         <BookShelf title="Want to Read" books={this.state.booksWantToRead}/>
+         <BookShelf shelfType="wantToRead" title="Want to Read" books={this.state.booksWantToRead}/>
 
-         <BookShelf title="Read" books={this.state.booksRead}/>
+         <BookShelf shelfType="read" title="Read" books={this.state.booksRead}/>
 
        </div>
        <Link to='/search' className='open-search'> Search For Books

@@ -9,14 +9,9 @@ class Book extends Component {
 			book: PropTypes.object.isRequired
 	  }
 
-		state = {
-			shelf: "none"
-		}
-
 	render() {
 
-		const { book } = this.props;
-
+		const { book, shelfType } = this.props;
 		return <div className="book">
 										<div className="book-top">
 											<div className="book-cover" style={{
@@ -26,7 +21,7 @@ class Book extends Component {
 											}}>
 											</div>
 											<div className="book-shelf-changer">
-													<select onChange={this.handleChange} value={this.state.shelf}>
+													<select onChange={this.handleChange} defaultValue={shelfType}>
 														<option value="none" disabled>Move to...</option>
 														<option value="currentlyReading">Currently Reading</option>
 														<option value="wantToRead">Want to Read</option>
