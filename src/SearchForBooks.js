@@ -14,8 +14,8 @@ state = {
   render() {
     return <div className="search-books">
       <div className="search-books-bar">
-      <Link to='/' className='close-search'> Close
-       </Link>
+        <Link to='/' className='close-search'> Close
+        </Link>
         <div className="search-books-input-wrapper">
           {/*
             NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -33,7 +33,7 @@ state = {
       </div>
       <div className="search-books-results">
         <ol className="books-grid"></ol>
-          {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book}/></li>))}
+        {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book}/></li>))}
       </div>
     </div>
   }

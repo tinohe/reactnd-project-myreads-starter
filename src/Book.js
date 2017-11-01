@@ -14,13 +14,13 @@ class Book extends Component {
 
 		const { book, shelfType} = this.props;
 		return <div className="book">
-										<div className="book-top">
-											<div className="book-cover" style={{
-												width: 130,
-				              	height: 190,
+			<div className="book-top">
+				<div className="book-cover" style={{
+					width: 130,
+					height: 190,
 												backgroundImage: `url("${book.imageLinks.thumbnail}")`
-											}}>
-											</div>
+				}}>
+				</div>
 											<div className="book-shelf-changer">
 													<select onChange={this.handleChange} defaultValue={shelfType}>
 														<option value="none" disabled>Move to...</option>
