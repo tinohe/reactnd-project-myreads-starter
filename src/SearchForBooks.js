@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import serializeForm from 'form-serialize';
 
 import Book from './Book'
- import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 
 class SearchForBooks extends Component {
 
@@ -25,7 +25,7 @@ state = {
             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
             you don't find a specific author or title. Every search is limited by search terms.
           */}
-          <form onSubmit={ this.handleSubmit } className="">
+          <form onSubmit={ this.handleSubmit }>
             <input type="text" name="searchString" placeholder="Search by title or author"/>
           </form>
 
@@ -33,7 +33,7 @@ state = {
       </div>
       <div className="search-books-results">
         <ol className="books-grid"></ol>
-          {this.state.booksToDisplay.map((book, index) => (<li key={index}><Book title={book.title} authors={book.authors} imageurl={book.imageLinks.thumbnail}/></li>))}
+          {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book}/></li>))}
       </div>
     </div>
   }
