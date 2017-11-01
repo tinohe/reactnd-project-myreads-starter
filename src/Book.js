@@ -6,12 +6,13 @@ import * as BooksAPI from './BooksAPI'
 class Book extends Component {
 
 	static propTypes = {
-			book: PropTypes.object.isRequired
+			book: PropTypes.object.isRequired,
+			onBookMoved: PropTypes.func.isRequired
 	  }
 
 	render() {
 
-		const { book, shelfType } = this.props;
+		const { book, shelfType} = this.props;
 		return <div className="book">
 										<div className="book-top">
 											<div className="book-cover" style={{
@@ -38,6 +39,7 @@ class Book extends Component {
 
 	handleChange = (e) => {
     BooksAPI.update(this.props.book, e.target.value).then((json) => console.log(json))
+		this.props.onBookMoved(this.props.book, e.target.value)
   }
 }
 
