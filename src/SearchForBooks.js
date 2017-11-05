@@ -39,8 +39,11 @@ class SearchForBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
-          {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book} bookShelf={this.findBookShelf(bookShelves, book)} onBookMoved={onBookMoved}/></li>))}
+          <div className="bookshelf-books">
+            <ol className="books-grid">
+              {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book} bookShelf={this.findBookShelf(bookShelves, book)} onBookMoved={onBookMoved}/></li>))}
+            </ol>
+          </div>
         </div>
       </div>
   }
