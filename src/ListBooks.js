@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf'
+import BookShelfType from './BookShelfType'
 import PropTypes from 'prop-types';
 
 class ListBooks extends Component {
@@ -20,12 +21,12 @@ class ListBooks extends Component {
        </div>
        <div className="list-books-content">
 
-         <BookShelf bookShelf="currentlyReading" title="Currently Reading" onBookMoved={onBookMoved} books={bookShelves.currentlyReading}/>
+         <BookShelf bookShelfType={BookShelfType.currentlyReading} title="Currently Reading" onBookMoved={onBookMoved} books={bookShelves.currentlyReading}/>
 
-         <BookShelf bookShelf="wantToRead" title="Want to Read" onBookMoved={onBookMoved} books={bookShelves.wantToRead}/>
+         <BookShelf bookShelfType={BookShelfType.wantToRead} title="Want to Read" onBookMoved={onBookMoved} books={bookShelves.wantToRead}/>
 
-         <BookShelf bookShelf="read" title="Read" onBookMoved={onBookMoved} books={bookShelves.read}/>
-         
+         <BookShelf bookShelfType={BookShelfType.read} title="Read" onBookMoved={onBookMoved} books={bookShelves.read}/>
+
        </div>
        <Link to='/search' className='open-search'>Search For</Link>
      </div>

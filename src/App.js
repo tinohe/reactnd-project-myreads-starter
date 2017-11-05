@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI'
 
 import SearchForBooks from './SearchForBooks'
 import ListBooks from './ListBooks'
+import BookShelfType from './BookShelfType'
 
 import { Route } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ class BooksApp extends Component {
   }
 
     filterBooks = (books, shelf) => {
-      return books.filter((book) => book.shelf === shelf)
+      return books.filter((book) => book.shelf === shelf.name)
     }
 
     removeBook = (books, book) => {
@@ -27,9 +28,9 @@ class BooksApp extends Component {
     }
 
     onBookMoved = (book, shelf) => {
-      BooksAPI.update(book, shelf).then((json) => console.log(json))
+      BooksAPI.update(book, shelf)
 
-      if (shelf === "none") {
+      if (shelf === BookShelfType.none.name) {
         this.setState((state) => ({
           bookShelves: {
             currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
@@ -39,7 +40,7 @@ class BooksApp extends Component {
         }))
       }
 
-      if (shelf === "currentlyReading") {
+      if (shelf === BookShelfType.currentlyReading.name) {
         this.setState((state) => ({
           bookShelves: {
             currentlyReading: state.bookShelves.currentlyReading.concat(book),
@@ -49,7 +50,7 @@ class BooksApp extends Component {
         }))
       }
 
-      if (shelf === "wantToRead") {
+      if (shelf === BookShelfType.wantToRead.name) {
         this.setState((state) => ({
             bookShelves: {
               currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
@@ -59,7 +60,7 @@ class BooksApp extends Component {
         }))
       }
 
-      if (shelf === "read") {
+      if (shelf === BookShelfType.read.name) {
         this.setState((state) => ({
             bookShelves: {
               currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
@@ -73,9 +74,9 @@ class BooksApp extends Component {
   componentDidMount() {
     BooksAPI.getAll().then((books) => (this.setState({
       bookShelves: {
-        currentlyReading: this.filterBooks(books,  "currentlyReading"),
-        wantToRead: this.filterBooks(books, "wantToRead"),
-        read: this.filterBooks(books, "read")
+        currentlyReading: this.filterBooks(books,  BookShelfType.currentlyReading),
+        wantToRead: this.filterBooks(books, BookShelfType.wantToRead),
+        read: this.filterBooks(books, BookShelfType.read)
     }
     })))
   }

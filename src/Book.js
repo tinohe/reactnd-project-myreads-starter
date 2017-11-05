@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import BookShelfType from './BookShelfType'
+
 class Book extends Component {
 
 	static propTypes = {
 			book: PropTypes.object.isRequired,
 			onBookMoved: PropTypes.func.isRequired,
-			bookShelf: PropTypes.string.isRequired
+			bookShelfType: PropTypes.object.isRequired
 	  }
 
 	render() {
 
-		const { book, bookShelf} = this.props;
+		const { book, bookShelfType} = this.props;
 
 		return <div className="book">
 			<div className="book-top">
@@ -22,12 +24,12 @@ class Book extends Component {
 				}}>
 				</div>
 				<div className="book-shelf-changer">
-					<select onChange={this.handleChange} defaultValue={bookShelf}>
+					<select onChange={this.handleChange} defaultValue={bookShelfType.name}>
 						<option value="noValue" disabled>Move to...</option>
-						<option value="currentlyReading">Currently Reading</option>
-						<option value="wantToRead">Want to Read</option>
-						<option value="read">Read</option>
-						<option value="none">None</option>
+						<option value={BookShelfType.currentlyReading.name}>Currently Reading</option>
+						<option value={BookShelfType.wantToRead.name}>Want to Read</option>
+						<option value={BookShelfType.read.name}>Read</option>
+						<option value={BookShelfType.none.name}>None</option>
 					</select>
 				</div>
 			</div>

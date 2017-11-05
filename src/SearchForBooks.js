@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import serializeForm from 'form-serialize';
 
 import Book from './Book'
+import BookShelfType from './BookShelfType'
 import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types';
 
@@ -41,30 +42,30 @@ class SearchForBooks extends Component {
         <div className="search-books-results">
           <div className="bookshelf-books">
             <ol className="books-grid">
-              {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book} bookShelf={this.findBookShelf(bookShelves, book)} onBookMoved={onBookMoved}/></li>))}
+              {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book} bookShelfType={this.findBookShelfType(bookShelves, book)} onBookMoved={onBookMoved}/></li>))}
             </ol>
           </div>
         </div>
       </div>
   }
 
-  findBookShelf = (bookShelves, book) => {
+  findBookShelfType = (bookShelves, book) => {
     let res = bookShelves.currentlyReading.some((b) => book.id === b.id)
     if (res) {
-      return "currentlyReading"
+      return BookShelfType.currentlyReading
     }
 
     res = bookShelves.wantToRead.some((b) => book.id === b.id)
     if (res) {
-      return "wantToRead"
+      return BookShelfType.wantToRead
     }
 
     res = bookShelves.read.some((b) => book.id === b.id)
     if (res) {
-      return "read"
+      return BookShelfType.read
     }
 
-    return "none"
+    return BookShelfType.none
   }
 
   handleSubmit = (e) => {

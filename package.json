@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "enumify": "^1.0.4",
     "form-serialize": "^0.7.2",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
