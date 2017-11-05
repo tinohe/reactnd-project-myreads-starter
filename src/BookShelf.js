@@ -7,24 +7,24 @@ class BookShelf extends Component {
 
   static propTypes = {
 	    title: PropTypes.string.isRequired,
-      shelfType:PropTypes.string.isRequired,
+      bookShelf:PropTypes.string.isRequired,
       onBookMoved: PropTypes.func.isRequired,
 	    books: PropTypes.array
 	  }
 
   render() {
-    const {shelfType, title, onBookMoved, books} = this.props
+    const {bookShelf, title, onBookMoved, books} = this.props
 
     return <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">{title}</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  { books.map((book, index) => (<li key={index}><Book book={book} onBookMoved={onBookMoved} shelfType={shelfType}/></li>)) }
-                </ol>
-              </div>
-            </div>
+      <div className="bookshelf">
+        <h2 className="bookshelf-title">{title}</h2>
+        <div className="bookshelf-books">
+          <ol className="books-grid">
+            { books.map((book) => (<li key={book.id}><Book book={book} onBookMoved={onBookMoved} bookShelf={bookShelf}/></li>)) }
+          </ol>
         </div>
+      </div>
+    </div>
   }
 }
 

@@ -4,38 +4,64 @@ import serializeForm from 'form-serialize';
 
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types';
 
 class SearchForBooks extends Component {
 
-state = {
-    booksToDisplay: []
-}
+  static propTypes = {
+      onBookMoved: PropTypes.func.isRequired,
+      bookShelves: PropTypes.object.isRequired
+  }
+
+  state = {
+      booksToDisplay: []
+  }
 
   render() {
-    return <div className="search-books">
-      <div className="search-books-bar">
-        <Link to='/' className='close-search'> Close
-        </Link>
-        <div className="search-books-input-wrapper">
-          {/*
-            NOTES: The search from BooksAPI is limited to a particular set of search terms.
-            You can find these search terms here:
-            https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+      const { onBookMoved, bookShelves} = this.props;
 
-            However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-            you don't find a specific author or title. Every search is limited by search terms.
-          */}
-          <form onSubmit={ this.handleSubmit }>
-            <input type="text" name="searchString" placeholder="Search by title or author"/>
-          </form>
+      return <div className="search-books">
+        <div className="search-books-bar">
+          <Link to='/' className='close-search'>Close</Link>
+          <div className="search-books-input-wrapper">
+            {/*
+              NOTES: The search from BooksAPI is limited to a particular set of search terms.
+              You can find these search terms here:
+              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
 
+              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+              you don't find a specific author or title. Every search is limited by search terms.
+            */}
+            <form onSubmit={ this.handleSubmit }>
+              <input type="text" name="searchString" placeholder="Search by title or author"/>
+            </form>
+
+          </div>
+        </div>
+        <div className="search-books-results">
+          <ol className="books-grid"></ol>
+          {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book} bookShelf={this.findBookShelf(bookShelves, book)} onBookMoved={onBookMoved}/></li>))}
         </div>
       </div>
-      <div className="search-books-results">
-        <ol className="books-grid"></ol>
-        {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book}/></li>))}
-      </div>
-    </div>
+  }
+
+  findBookShelf = (bookShelves, book) => {
+    let res = bookShelves.currentlyReading.some((b) => book.id === b.id)
+    if (res) {
+      return "currentlyReading"
+    }
+
+    res = bookShelves.wantToRead.some((b) => book.id === b.id)
+    if (res) {
+      return "wantToRead"
+    }
+
+    res = bookShelves.read.some((b) => book.id === b.id)
+    if (res) {
+      return "read"
+    }
+
+    return "none"
   }
 
   handleSubmit = (e) => {
