@@ -17,12 +17,14 @@ class Book extends Component {
 
 		return <div className="book">
 			<div className="book-top">
-				<div className="book-cover" style={{
-					width: 130,
-					height: 190,
-					backgroundImage: `url("${book.imageLinks.thumbnail}")`
-				}}>
-				</div>
+				{book.imageLinks.thumbnail &&
+					<div className="book-cover" style={{
+						width: 130,
+						height: 190,
+						backgroundImage: `url("${book.imageLinks.thumbnail}")`
+					}}>
+					</div>
+				}
 				<div className="book-shelf-changer">
 					<select onChange={this.handleChange} defaultValue={bookShelfType.name}>
 						<option value="noValue" disabled>Move to...</option>
