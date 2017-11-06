@@ -27,47 +27,49 @@ class BooksApp extends Component {
     }
 
     onBookMoved = (book, shelf) => {
-      BooksAPI.update(book, shelf)
+      BooksAPI.update(book, shelf).then(() => {
 
-      if (shelf === BookShelfType.none.name) {
-        this.setState((state) => ({
-          bookShelves: {
-            currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
-            wantToRead: this.removeBook(state.bookShelves.wantToRead, book),
-            read: this.removeBook(state.bookShelves.read, book)
-        }
-        }))
-      }
+          if (shelf === BookShelfType.none.name) {
+            this.setState((state) => ({
+              bookShelves: {
+                currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
+                wantToRead: this.removeBook(state.bookShelves.wantToRead, book),
+                read: this.removeBook(state.bookShelves.read, book)
+            }
+            }))
+          }
 
-      if (shelf === BookShelfType.currentlyReading.name) {
-        this.setState((state) => ({
-          bookShelves: {
-            currentlyReading: state.bookShelves.currentlyReading.concat(book),
-            wantToRead: this.removeBook(state.bookShelves.wantToRead, book),
-            read: this.removeBook(state.bookShelves.read, book)
-        }
-        }))
-      }
+          if (shelf === BookShelfType.currentlyReading.name) {
+            this.setState((state) => ({
+              bookShelves: {
+                currentlyReading: state.bookShelves.currentlyReading.concat(book),
+                wantToRead: this.removeBook(state.bookShelves.wantToRead, book),
+                read: this.removeBook(state.bookShelves.read, book)
+            }
+            }))
+          }
 
-      if (shelf === BookShelfType.wantToRead.name) {
-        this.setState((state) => ({
-            bookShelves: {
-              currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
-              wantToRead: state.bookShelves.wantToRead.concat(book),
-              read: this.removeBook(state.bookShelves.read, book)
-        }
-        }))
-      }
+          if (shelf === BookShelfType.wantToRead.name) {
+            this.setState((state) => ({
+                bookShelves: {
+                  currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
+                  wantToRead: state.bookShelves.wantToRead.concat(book),
+                  read: this.removeBook(state.bookShelves.read, book)
+            }
+            }))
+          }
 
-      if (shelf === BookShelfType.read.name) {
-        this.setState((state) => ({
-            bookShelves: {
-              currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
-              wantToRead: this.removeBook(state.bookShelves.wantToRead, book),
-              read: state.bookShelves.read.concat(book)
+          if (shelf === BookShelfType.read.name) {
+            this.setState((state) => ({
+                bookShelves: {
+                  currentlyReading: this.removeBook(state.bookShelves.currentlyReading, book),
+                  wantToRead: this.removeBook(state.bookShelves.wantToRead, book),
+                  read: state.bookShelves.read.concat(book)
+            }
+            }))
+          }
         }
-        }))
-      }
+      )
   }
 
   componentDidMount() {
