@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import * as BooksAPI from './BooksAPI'
 import SearchForBooks from './SearchForBooks'
 import ListBooks from './ListBooks'
 import BookShelfType from './BookShelfType'
+import ErrorPage from './ErrorPage'
 
 
 import './App.css'
@@ -85,17 +86,21 @@ class BooksApp extends Component {
   render() {
     return (
       <div className="app">
-
-        <Route
-          exact
-          path='/'
-          render={ () => (   <ListBooks onBookMoved={this.onBookMoved} bookShelves={this.state.bookShelves}/>)}
-        />
-        <Route
-          exact
-          path='/search'
-          render={ () => (   <SearchForBooks onBookMoved={this.onBookMoved} bookShelves={this.state.bookShelves}/>)}
-        />
+        <Switch>
+          <Route
+            exact
+            path='/'
+            render={ () => (   <ListBooks onBookMoved={this.onBookMoved} bookShelves={this.state.bookShelves}/>)}
+          />
+          <Route
+            exact
+            path='/search'
+            render={ () => (   <SearchForBooks onBookMoved={this.onBookMoved} bookShelves={this.state.bookShelves}/>)}
+          />
+          <Route
+            render={ () => (   <ErrorPage/>)}
+          />
+        </Switch>
       </div>
     )
   }
