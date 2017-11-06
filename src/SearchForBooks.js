@@ -71,9 +71,14 @@ class SearchForBooks extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const values = serializeForm(e.target, {hash:true})
-    BooksAPI.search(values.searchString, 20)
-      .then((books) => (this.setState({booksToDisplay: books})))
-      .catch(() => (this.setState({booksToDisplay: []})))
+    if(values.searchString) {
+      BooksAPI.search(values.searchString, 20)
+        .then((books) => (this.setState({booksToDisplay: books})))
+        .catch(() => (this.setState({booksToDisplay: []})))
+    }
+    else {
+      this.setState({booksToDisplay: []})
+    }
   }
 }
 
