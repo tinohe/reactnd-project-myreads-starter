@@ -12,12 +12,11 @@ const ListBooks = (props) => {
         <h1>MyReads</h1>
       </div>
       <div className="list-books-content">
+        <BookShelf bookShelfType={BookShelfType.currentlyReading} title="Currently Reading" onBookMoved={props.onBookMoved} books={props.books.filter((book) => (book.shelf === BookShelfType.currentlyReading.name))}/>
 
-        <BookShelf bookShelfType={BookShelfType.currentlyReading} title="Currently Reading" onBookMoved={props.onBookMoved} books={props.bookShelves.currentlyReading}/>
+        <BookShelf bookShelfType={BookShelfType.wantToRead} title="Want to Read" onBookMoved={props.onBookMoved} books={props.books.filter((book) => (book.shelf === BookShelfType.wantToRead.name))}/>
 
-        <BookShelf bookShelfType={BookShelfType.wantToRead} title="Want to Read" onBookMoved={props.onBookMoved} books={props.bookShelves.wantToRead}/>
-
-        <BookShelf bookShelfType={BookShelfType.read} title="Read" onBookMoved={props.onBookMoved} books={props.bookShelves.read}/>
+        <BookShelf bookShelfType={BookShelfType.read} title="Read" onBookMoved={props.onBookMoved} books={props.books.filter((book) => (book.shelf === BookShelfType.read.name))}/>
 
       </div>
       <Link to='/search' className='open-search'>Search For</Link>

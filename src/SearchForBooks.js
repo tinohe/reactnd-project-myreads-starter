@@ -11,7 +11,7 @@ class SearchForBooks extends Component {
 
   static propTypes = {
       onBookMoved: PropTypes.func.isRequired,
-      bookShelves: PropTypes.object.isRequired
+      books: PropTypes.array.isRequired
   }
 
   state = {
@@ -19,7 +19,7 @@ class SearchForBooks extends Component {
   }
 
   render() {
-      const { onBookMoved, bookShelves} = this.props;
+      const { onBookMoved, books} = this.props;
 
       return <div className="search-books">
         <div className="search-books-bar">
@@ -42,27 +42,17 @@ class SearchForBooks extends Component {
         <div className="search-books-results">
           <div className="bookshelf-books">
             <ol className="books-grid">
-              {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book} bookShelfType={this.findBookShelfType(bookShelves, book)} onBookMoved={onBookMoved}/></li>))}
+              {this.state.booksToDisplay.map((book, index) => (<li key={book.id}><Book book={book} bookShelfType={this.findBookShelfType(books, book)} onBookMoved={onBookMoved}/></li>))}
             </ol>
           </div>
         </div>
       </div>
   }
 
-  findBookShelfType = (bookShelves, book) => {
-    let res = bookShelves.currentlyReading.some((b) => book.id === b.id)
+  findBookShelfType = (books, book) => {
+    let res = books.find((b) => b.id === book.id)
     if (res) {
-      return BookShelfType.currentlyReading
-    }
-
-    res = bookShelves.wantToRead.some((b) => book.id === b.id)
-    if (res) {
-      return BookShelfType.wantToRead
-    }
-
-    res = bookShelves.read.some((b) => book.id === b.id)
-    if (res) {
-      return BookShelfType.read
+      return BookShelfType.enumValueOf(res.shelf)
     }
 
     return BookShelfType.none
