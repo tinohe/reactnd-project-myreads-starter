@@ -1,10 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
 
-class ErrorPage extends Component {
 
-  render() {
-    return <div>Oops, couldn't find your site. Sorry, dude!</div>
-  }
+const ErrorPage = (props) => {
+  return <div>Oops, couldn't find your site. Sorry, dude!</div>
 }
 
 export default ErrorPage
